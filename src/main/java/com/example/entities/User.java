@@ -14,6 +14,12 @@ public class User {
     private String imie;
     private String nazwisko;
     private String mail;
+    private String haslo;
+    private int rokst;
+    private String kierunek;
+    private int grupa;
+    private String plec;
+    private UserRole role;
 
     public Long getId() {
         return id;
@@ -88,12 +94,6 @@ public class User {
         this.plec = plec;
     }
 
-    private String haslo;
-    private int rokst;
-    private String kierunek;
-    private int grupa;
-    private String plec;
-   private UserRole role;
 
     public UserRole getRole() {
         return role;
