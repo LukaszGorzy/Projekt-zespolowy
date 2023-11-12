@@ -17,8 +17,8 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-//    klucz wygenerowany na stronie https://www.javaguides.net/p/online-jwt-generator.html
-    public static final String SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc3N1ZXIgKGlzcykiOiJJc3N1ZXIiLCJJc3N1ZWQgQXQgKGlhdCkiOiIyMDIzLTExLTA0VDEwOjU3OjIwLjY1N1oiLCJFeHBpcmF0aW9uIFRpbWUgKGV4cCkiOiIyMDIzLTExLTA0VDExOjU3OjIwLjY1N1oiLCJTdWJqZWN0IChzdWIpIjoiU3ViamVjdCIsIlVzZXJuYW1lIChhdWQpIjoiSmF2YUd1aWRlcyIsIlJvbGUiOiJBRE1JTiJ9.aTRCXCrFwf6k-tBgXqzsgF5ZeFe4uQVHhmDgH2HyF60";
+
+public static final String SECRET = "413F4428472B4B6250655368566D5970337336763979244226452948404D6351";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -39,7 +39,8 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-    private Boolean validateToken(String token, UserDetails userDetails) {
+
+    public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
@@ -50,8 +51,11 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String userName) {
-
-        return Jwts.builder().setClaims(claims).setSubject(userName).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts
+                .builder()
+                .setClaims(claims)
+                .setSubject(userName)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }

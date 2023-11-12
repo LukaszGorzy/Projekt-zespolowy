@@ -2,11 +2,15 @@ package com.example.entities;
 
 import com.example.enums.UserRole;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "uzytkownicy", schema ="dziennikszkolny")
+@Getter
+@Setter
+@Table(name = "uzytkownicy")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
