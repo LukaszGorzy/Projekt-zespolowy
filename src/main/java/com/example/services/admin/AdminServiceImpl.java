@@ -9,28 +9,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImpl {
-
     private final UserRepository userRepository;
 
     public AdminServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @PostConstruct
+@PostConstruct
     public void createAdminAccount(){
       User adminAccount = userRepository.findByRole(UserRole.ADMIN);
-      if(adminAccount == null) {
-          User admin = new User();
-          admin.setImie("Test3");
-          admin.setNazwisko("Test4");
-          admin.setMail("admin@test3.com");
-          admin.setHaslo(new BCryptPasswordEncoder().encode("admin5"));
-          admin.setRokst(4);
-          admin.setKierunek("Test6");
-          admin.setGrupa(27);
-          admin.setPlec("Mężczyzna");
-          admin.setRole(UserRole.ADMIN);
-          userRepository.save(admin);
+     if(adminAccount == null) {
+            User admin = new User();
+            admin.setMail("admin@test4.com");
+            admin.setImie("Test2");
+            admin.setNazwisko("Test3");
+            admin.setRole(UserRole.ADMIN);
+            admin.setHaslo(new BCryptPasswordEncoder().encode("admin2"));
+            admin.setRokst(4);
+            admin.setKierunek("Test2");
+            admin.setGrupa(27);
+            admin.setPlec("Mężczyzna");
+            userRepository.save(admin);
         }
     }
 }
