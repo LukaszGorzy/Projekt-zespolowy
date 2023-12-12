@@ -2,6 +2,7 @@ package com.example.entities;
 
 import com.example.enums.UserRole;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "uzytkownicy")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,7 @@ public class User {
     private UserRole role;
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -34,7 +36,7 @@ public class User {
     }
 
     public String getImie() {
-        return imie;
+        return this.imie;
     }
 
     public void setImie(String imie) {
@@ -42,7 +44,7 @@ public class User {
     }
 
     public String getNazwisko() {
-        return nazwisko;
+        return this.nazwisko;
     }
 
     public void setNazwisko(String nazwisko) {
@@ -51,7 +53,7 @@ public class User {
 
 
     public String getMail() {
-        return mail;
+        return this.mail;
     }
 
     public void setMail(String mail) {
@@ -59,7 +61,7 @@ public class User {
     }
 
     public String getHaslo() {
-        return haslo;
+        return this.haslo;
     }
 
     public void setHaslo(String haslo) {
@@ -67,7 +69,7 @@ public class User {
     }
 
     public int getRokst() {
-        return rokst;
+        return this.rokst;
     }
 
     public void setRokst(int rokst) {
@@ -75,7 +77,7 @@ public class User {
     }
 
     public String getKierunek() {
-        return kierunek;
+        return this.kierunek;
     }
 
     public void setKierunek(String kierunek) {
@@ -83,7 +85,7 @@ public class User {
     }
 
     public int getGrupa() {
-        return grupa;
+        return this.grupa;
     }
 
     public void setGrupa(int grupa) {
@@ -91,7 +93,7 @@ public class User {
     }
 
     public String getPlec() {
-        return plec;
+        return this.plec;
     }
 
     public void setPlec(String plec) {
@@ -100,7 +102,7 @@ public class User {
 
 
     public UserRole getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(UserRole role) {

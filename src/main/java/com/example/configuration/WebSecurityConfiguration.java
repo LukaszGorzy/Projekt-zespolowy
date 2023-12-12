@@ -13,24 +13,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity
 @EnableWebSecurity
+@EnableMethodSecurity
 public class WebSecurityConfiguration {
+    @Bean
+    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception  {
         return httpSecurity.csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/authenticate").permitAll()
+                .authorizeHttpRequests().requestMatchers("/login","/authentication").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("").authenticated()
+                .authorizeHttpRequests().requestMatchers("/api/**").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().build();
-
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
