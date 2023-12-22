@@ -1,4 +1,4 @@
-package com.example.services.admin.jwt;
+package com.example.services.jwt;
 
 import com.example.entities.User;
 import com.example.repositories.UserRepository;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

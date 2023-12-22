@@ -1,20 +1,7 @@
-package com.example.entities;
+package com.example.dto;
 
-import com.example.dto.StudentDto;
-import com.example.enums.UserRole;
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+public class StudentDto {
 
-@Entity
-@Getter
-@Setter
-@Table(name = "uzytkownicy")
-@Data
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imie;
@@ -33,10 +20,8 @@ public class User {
 
     private String plec;
 
-    private UserRole role;
-
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -44,7 +29,7 @@ public class User {
     }
 
     public String getImie() {
-        return this.imie;
+        return imie;
     }
 
     public void setImie(String imie) {
@@ -52,7 +37,7 @@ public class User {
     }
 
     public String getNazwisko() {
-        return this.nazwisko;
+        return nazwisko;
     }
 
     public void setNazwisko(String nazwisko) {
@@ -60,7 +45,7 @@ public class User {
     }
 
     public String getMail() {
-        return this.mail;
+        return mail;
     }
 
     public void setMail(String mail) {
@@ -68,19 +53,11 @@ public class User {
     }
 
     public String getHaslo() {
-        return this.haslo;
+        return haslo;
     }
 
     public void setHaslo(String haslo) {
         this.haslo = haslo;
-    }
-
-    public UserRole getRole() {
-        return this.role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
     }
 
     public String getRokst() {
@@ -113,17 +90,5 @@ public class User {
 
     public void setPlec(String plec) {
         this.plec = plec;
-    }
-
-    public StudentDto getStudentDto() {
-        StudentDto studentDto = new StudentDto();
-        studentDto.setId(id);
-        studentDto.setMail(mail);
-        studentDto.setImie(imie);
-        studentDto.setNazwisko(nazwisko);
-        studentDto.setKierunek(kierunek);
-        studentDto.setPlec(plec);
-        studentDto.setRokst(rokst);
-        return studentDto;
     }
 }

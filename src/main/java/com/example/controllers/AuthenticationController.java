@@ -37,7 +37,7 @@ public class AuthenticationController {
     public static final String HEADER_STRING = "Authorization ";
 
     @PostMapping("/authentication")
-    public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException, JSONException {
+    public void  createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest, HttpServletResponse response) throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException, JSONException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getMail(),authenticationRequest.getHaslo()));
 
@@ -45,24 +45,22 @@ public class AuthenticationController {
             throw new BadCredentialsException("Niepoprawne dane logowania");
         } catch(DisabledException disabledException) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND,"Taki uzytkownik nie istieje");
-            return null;
+            return;
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getMail());
-//        Optional<User> optionalUser = userRepository.findFirstByMail(userDetails.getUsername());
+        User user = userRepository.findFirstByMail(userDetails.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-//        if (optionalUser.isPresent()) {
-//            response.getWriter().write(new JSONObject()
-//                    .put("userId", optionalUser.get().getId())
-//                    .put("role", optionalUser.get().getRole())
-//                    .toString());
-//        }
+        if (user != null) {
+            response.getWriter().write(new JSONObject()
+                    .put("userId", user.getId())
+                    .put("role", user.getRole())
+                    .toString());
+        }
 
-//        response.setHeader("Access-Control-Expose-Headers", "Authorization");
-//        response.setHeader("Access-Control-Allow_Headers", "Authorization,X-Pingother,Origin,X-Requested-With,Content-Type,Accept,X-Custom-header");
-//        response.setHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
-
-        return new AuthenticationResponse(jwt);
+        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+        response.setHeader("Access-Control-Allow_Headers", "Authorization,X-Pingother,Origin,X-Requested-With,Content-Type,Accept,X-Custom-header");
+        response.setHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
 
     }
 }
