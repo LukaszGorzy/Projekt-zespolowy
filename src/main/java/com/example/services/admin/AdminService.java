@@ -1,7 +1,6 @@
 package com.example.services.admin;
 
-import com.example.dto.SingleStudentDto;
-import com.example.dto.StudentDto;
+import com.example.dto.*;
 
 import java.util.List;
 
@@ -16,4 +15,20 @@ public interface AdminService {
     SingleStudentDto getStudentById(Long studentId);
 
     StudentDto updateStudent(Long studentId, StudentDto studentDto);
+
+    FeeDto payFee(Long studentId, FeeDto feeDto);
+
+    List<StudentLeaveDto> getAllAppliedLeaves();
+
+    StudentLeaveDto changeLeaveStatus(Long leaveId, String status);
+
+    TeacherDto postTeacher(TeacherDto teacherDto);
+
+    List<TeacherDto> getAllTeachers();
+
+    void deleteTeacher(Long teacherId);
+
+    SingleTeacherDto getTeacherById(Long teacherId);
+
+    TeacherDto updateTeacher(Long teacherId, TeacherDto teacherDto);
 }
